@@ -1,12 +1,12 @@
 {
-  "name": "gatsby-starter-default",
-  "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "name": "crowd-funder",
+  "description": "A simple starter application to get crowd funding",
+  "version": "1.0.0",
+  "author": "privateOmega <privateomega@protonmail.com>",
   "dependencies": {
     "gatsby": "^2.19.7",
     "gatsby-image": "^2.2.39",
+    "gatsby-plugin-layout": "^1.1.22",
     "gatsby-plugin-manifest": "^2.2.39",
     "gatsby-plugin-offline": "^3.0.32",
     "gatsby-plugin-react-helmet": "^3.1.21",
@@ -22,7 +22,7 @@
     "prettier": "^1.19.1"
   },
   "keywords": [
-    "gatsby"
+    "crowd funder"
   ],
   "license": "MIT",
   "scripts": {
@@ -36,9 +36,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/privateomega/crowd-funder"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/privateomega/crowd-funder/issues"
   }
 }
