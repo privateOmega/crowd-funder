@@ -1,11 +1,17 @@
 import React from "react"
+import { Favorite } from "@material-ui/icons"
 
-const Footer = () => (
-  <footer>
-    © {new Date().getFullYear()}, Built with
-    {` `}
-    <a href="https://www.gatsbyjs.org">Gatsby</a>
-  </footer>
-)
+function Footer(props) {
+  return (
+    <footer>
+      <div>
+        &copy; {new Date().getFullYear()}, made with <Favorite /> by{" "}
+        <a href="https://www.github.com/privateOmega">
+          privateOmega
+        </a>
+      </div>
+    </footer>
+  )
+}
 
 export default Footer

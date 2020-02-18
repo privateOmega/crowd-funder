@@ -1,22 +1,19 @@
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
+import { AppBar, Toolbar, Drawer, Hidden, IconButton } from "@material-ui/core"
+import { Menu } from "@material-ui/icons"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
+function Header({ siteTitle, rightLinks }) {
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
+
+  return (
+    <AppBar>
+      <Toolbar>
         <Link
           to="/"
           style={{
@@ -26,13 +23,32 @@ const Header = ({ siteTitle }) => (
         >
           {siteTitle}
         </Link>
-      </h1>
-    </div>
-  </header>
-)
+        <Hidden smDown implementation="css">
+          {rightLinks}
+        </Hidden>
+        <Hidden mdUp>
+          <IconButton color="inherit" onClick={handleDrawerToggle}>
+            <Menu />
+          </IconButton>
+        </Hidden>
+      </Toolbar>
+      <Hidden mdUp implementation="js">
+        <Drawer
+          variant="temporary"
+          anchor={"right"}
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+        >
+          {rightLinks}
+        </Drawer>
+      </Hidden>
+    </AppBar>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
+  rightLinks: PropTypes.node,
 }
 
 Header.defaultProps = {

@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+import HeaderLinks from "./header-links"
 import Footer from "./footer"
 import "./layout.css"
 
@@ -19,7 +20,10 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header
+        siteTitle={data.site.siteMetadata.title}
+        rightLinks={<HeaderLinks />}
+      />
       <div
         style={{
           margin: `0 auto`,
