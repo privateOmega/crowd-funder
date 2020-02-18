@@ -1,10 +1,23 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
-import { AppBar, Toolbar, Drawer, Hidden, IconButton } from "@material-ui/core"
+import {
+  AppBar,
+  Toolbar,
+  Drawer,
+  Hidden,
+  Button,
+  IconButton,
+  makeStyles,
+} from "@material-ui/core"
 import { Menu } from "@material-ui/icons"
+import classNames from "classnames"
+
+import headerStyles from "../styles/header"
+
+const useStyles = makeStyles(headerStyles)
 
 function Header({ siteTitle, rightLinks }) {
+  const classes = useStyles()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleDrawerToggle = () => {
@@ -12,22 +25,20 @@ function Header({ siteTitle, rightLinks }) {
   }
 
   return (
-    <AppBar>
-      <Toolbar>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
+    <AppBar
+      className={classNames({
+        [classes.appBar]: true,
+        [classes["dark"]]: true,
+        [classes.fixed]: true,
+      })}
+    >
+      <Toolbar className={classes.container}>
+        <Button className={classes.title}>{siteTitle}</Button>
         <Hidden smDown implementation="css">
           {rightLinks}
         </Hidden>
         <Hidden mdUp>
-          <IconButton color="inherit" onClick={handleDrawerToggle}>
+          <IconButton color="inherit" onClick={handleDrawerToggle} edge="end">
             <Menu />
           </IconButton>
         </Hidden>
