@@ -1,16 +1,17 @@
-import { red } from "@material-ui/core/colors"
 import { createMuiTheme } from "@material-ui/core/styles"
+
+import { primaryColor, secondaryColor, dangerColor } from "../color-scheme"
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#556cd6",
+      main: primaryColor,
     },
     secondary: {
-      main: "#19857b",
+      main: secondaryColor,
     },
     error: {
-      main: red.A400,
+      main: dangerColor,
     },
     background: {
       default: "#fff",
