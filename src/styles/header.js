@@ -1,11 +1,12 @@
-import { container } from "./crowd-funder"
 import {
   primaryColor,
   infoColor,
   successColor,
   warningColor,
   dangerColor,
-} from "../color-scheme"
+  defaultFont,
+  container,
+} from "./crowd-funder"
 
 const headerStyle = {
   appBar: {
@@ -43,6 +44,7 @@ const headerStyle = {
     flex: 1,
   },
   title: {
+    ...defaultFont,
     lineHeight: "30px",
     fontSize: "18px",
     borderRadius: "3px",
