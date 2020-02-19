@@ -5,7 +5,6 @@ module.exports = {
     author: `@privateOmega`,
   },
   plugins: [
-    `gatsby-theme-material-ui`,
     `gatsby-plugin-layout`,
     `gatsby-plugin-react-helmet`,
     {
@@ -28,6 +27,19 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/icon.png`, // This path is relative to the root of the site.
       },
-    }
+    },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Roboto`,
+          },
+          {
+            family: `Roboto Slab`,
+          },
+        ],
+      },
+    },
   ],
 }
