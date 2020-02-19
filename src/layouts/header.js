@@ -28,7 +28,7 @@ function Header({ siteTitle, rightLinks }) {
     <AppBar
       className={classNames({
         [classes.appBar]: true,
-        [classes["dark"]]: true,
+        [classes["transparent"]]: true,
         [classes.fixed]: true,
       })}
     >
