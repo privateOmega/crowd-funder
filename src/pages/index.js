@@ -22,10 +22,12 @@ function IndexPage() {
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>E-bike.</h1>
+              <h1 className={classes.title}>SmartWatch.</h1>
               <h4>
-                An electric bicycle also known as an e-bike is a bicycle with an
-                integrated electric motor which can be used for propulsion.
+                A smartwatch is a wearable computer in the form of a wristwatch,
+                modern smartwatches provide a local touchscreen interface for
+                daily use, while an associated smartphone app provides for
+                management and telemetry.
               </h4>
               <br />
               <Button href="/login" color="danger">
