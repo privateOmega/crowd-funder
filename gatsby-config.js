@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/crowd-funder",
   siteMetadata: {
     title: `Crowd Funder`,
     description: `A simple starter application to get crowd funding.`,
