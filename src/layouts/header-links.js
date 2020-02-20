@@ -3,9 +3,9 @@ import { List, ListItem, makeStyles } from "@material-ui/core"
 
 import Button from "../components/button"
 
-import headerLinkStyle from "../styles/header-link"
+import headerLinkStyles from "../styles/header-link"
 
-const useStyles = makeStyles(headerLinkStyle)
+const useStyles = makeStyles(headerLinkStyles)
 
 function HeaderLinks(props) {
   const classes = useStyles()

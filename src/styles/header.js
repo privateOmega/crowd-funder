@@ -8,7 +8,7 @@ import {
   container,
 } from "./crowd-funder"
 
-const headerStyle = {
+const headerStyles = {
   appBar: {
     display: "flex",
     border: "0",
@@ -113,4 +113,4 @@ const headerStyle = {
   },
 }
 
-export default headerStyle
+export default headerStyles

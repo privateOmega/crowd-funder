@@ -3,9 +3,9 @@ import PropTypes from "prop-types"
 import classNames from "classnames"
 import { makeStyles } from "@material-ui/core"
 
-import styles from "../styles/parallax"
+import parallaxStyles from "../styles/parallax"
 
-const useStyles = makeStyles(styles)
+const useStyles = makeStyles(parallaxStyles)
 
 function Parallax({ filter, className, children, style, image, small }) {
   const classes = useStyles()

@@ -3,10 +3,10 @@ import PropTypes from "prop-types"
 import classNames from "classnames"
 import { Button, makeStyles } from "@material-ui/core"
 
-import buttonStyle from "../styles/button.js"
+import buttonStyles from "../styles/button.js"
 
 const makeComponentStyles = makeStyles(() => ({
-  ...buttonStyle,
+  ...buttonStyles,
 }))
 
 const RegularButton = React.forwardRef(

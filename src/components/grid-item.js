@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { makeStyles, Grid } from "@material-ui/core"
 
-const styles = {
+const gridItemStyles = {
   grid: {
     position: "relative",
     width: "100%",
@@ -13,7 +13,7 @@ const styles = {
   },
 }
 
-const useStyles = makeStyles(styles)
+const useStyles = makeStyles(gridItemStyles)
 
 export default function GridItem({ children, className, ...rest }) {
   const classes = useStyles()
