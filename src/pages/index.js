@@ -56,7 +56,7 @@ function IndexPage() {
           </div>
           <div className={classes.section}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8}>
+              <GridItem xs={8} sm={8} md={8}>
                 <ProgressBar variant="determinate" value={74.61} />
               </GridItem>
             </GridContainer>

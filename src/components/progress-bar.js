@@ -1,7 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { makeStyles, LinearProgress } from "@material-ui/core"
 
-import { makeStyles, LinearProgress, Grid } from "@material-ui/core"
+import GridContainer from "../components/grid-container"
+import GridItem from "../components/grid-item"
 
 import progressBarStyles from "../styles/progress-bar"
 
@@ -19,17 +21,17 @@ function ProgressBar({ color, ...rest }) {
           bar: classes.bar + " " + classes[color],
         }}
       />
-      <Grid container>
-        <Grid item xs>
+      <GridContainer justify="center">
+        <GridItem xs={4} sm={4} md={4}>
           $7461 Raised
-        </Grid>
-        <Grid item xs>
+        </GridItem>
+        <GridItem xs={4} sm={4} md={4}>
           12 Donors
-        </Grid>
-        <Grid item xs>
+        </GridItem>
+        <GridItem xs={4} sm={4} md={4}>
           $10000 Goal
-        </Grid>
-      </Grid>
+        </GridItem>
+      </GridContainer>
     </div>
   )
 }
