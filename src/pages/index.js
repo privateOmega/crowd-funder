@@ -1,5 +1,5 @@
 import React from "react"
-import { makeStyles, LinearProgress } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core"
 import classNames from "classnames"
 
 import SEO from "../components/seo"
@@ -7,6 +7,7 @@ import Parallax from "../components/parallax"
 import GridContainer from "../components/grid-container"
 import GridItem from "../components/grid-item"
 import Button from "../components/button"
+import ProgressBar from "../components/progress-bar"
 
 import indexPagestyles from "../styles/index-page"
 
@@ -56,7 +57,7 @@ function IndexPage() {
           <div className={classes.section}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8}>
-                <LinearProgress variant="determinate" color="primary" value={60} />
+                <ProgressBar variant="determinate" value={74.61} />
               </GridItem>
             </GridContainer>
           </div>
