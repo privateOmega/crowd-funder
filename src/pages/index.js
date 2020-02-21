@@ -59,7 +59,7 @@ function IndexPage() {
                   <InfoArea
                     title="Heartrate Sensor"
                     description="Accurate heart rate sensor would alert you in case of rising heart rate and helps you monitor exercise impact."
-                    Icon={Favorite}
+                    icon={Favorite}
                     iconColor="danger"
                     vertical
                   />
@@ -68,7 +68,7 @@ function IndexPage() {
                   <InfoArea
                     title="Sleep monitor"
                     description="Monitors your sleep accurately, so that you can download your data onto a smartphone to analyze sleeping patterns."
-                    Icon={Hotel}
+                    icon={Hotel}
                     iconColor="success"
                     vertical
                   />
@@ -77,7 +77,7 @@ function IndexPage() {
                   <InfoArea
                     title="Integration"
                     description="Keeps you always notified with latest updates on Social media, totally avoiding to take phones out from pockets or purses."
-                    Icon={Announcement}
+                    icon={Announcement}
                     iconColor="info"
                     vertical
                   />

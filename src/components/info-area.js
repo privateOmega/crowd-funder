@@ -7,7 +7,7 @@ import infoAreaStyles from "../styles/info-area"
 
 const useStyles = makeStyles(infoAreaStyles)
 
-function InfoArea({ title, description, Icon, iconColor, vertical }) {
+function InfoArea({ title, description, icon:Icon, iconColor, vertical }) {
   const classes = useStyles()
 
   return (
@@ -39,7 +39,7 @@ InfoArea.defaultProps = {
 }
 
 InfoArea.propTypes = {
-  Icon: PropTypes.object.isRequired,
+  icon: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   iconColor: PropTypes.oneOf([

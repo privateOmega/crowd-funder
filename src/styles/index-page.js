@@ -1,6 +1,6 @@
 import { container, title } from "./crowd-funder"
 
-const landingPageStyles = {
+const indexPageStyles = {
   container: {
     zIndex: "12",
     color: "#FFFFFF",
@@ -47,4 +47,4 @@ const landingPageStyles = {
   },
 }
 
-export default landingPageStyles
+export default indexPageStyles
