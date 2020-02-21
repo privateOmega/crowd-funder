@@ -9,6 +9,11 @@ const loginPageStyles = {
     color: "#FFFFFF",
     paddingBottom: "200px",
   },
+  formControl: {
+    margin: "0 0 12px 0",
+    paddingTop: "8px",
+    position: "relative",
+  },
 }
 
 export default loginPageStyles

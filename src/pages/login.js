@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {
   makeStyles,
   Card,
@@ -9,13 +9,17 @@ import {
   InputLabel,
   InputAdornment,
   CardHeader,
+  FormHelperText,
+  IconButton,
 } from "@material-ui/core"
 import { Person, Lock, Visibility, VisibilityOff } from "@material-ui/icons"
+import { Formik } from "formik"
 
 import SEO from "../components/seo"
 import GridContainer from "../components/grid-container"
 import GridItem from "../components/grid-item"
 import Button from "../components/button"
+import loginValidationScheme from "../components/login-validation-scheme"
 
 import loginPageStyles from "../styles/login-page"
 
@@ -24,63 +28,102 @@ const useStyles = makeStyles(loginPageStyles)
 function LoginPage() {
   const classes = useStyles()
 
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
     <>
       <SEO title="Login page" />
       <div className={classes.container}>
         <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={4}>
-            <Card>
-              <form className={classes.form}>
-                <CardHeader>
-                  <h4>Login</h4>
-                </CardHeader>
-                <CardContent>
-                  <FormControl fullWidth>
-                    <InputLabel htmlFor="username">Username</InputLabel>
-                    <Input
-                      id="username"
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <Person />
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
-                  <FormControl fullWidth>
-                    <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input
-                      id="password"
-                      type={"password"}
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <Lock />
-                        </InputAdornment>
-                      }
-                      endAdornment={
-                        <InputAdornment position="end">
-                          {/* <IconButton
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                          >
-                            {values.showPassword ? (
-                              <Visibility />
-                            ) : (
-                              <VisibilityOff />
-                            )}
-                          </IconButton> */}
-                          <VisibilityOff />
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
-                </CardContent>
-                <CardActions>
-                  <Button href="/login" color="danger" fullWidth>
-                    Donate
-                  </Button>
-                </CardActions>
-              </form>
+          <GridItem xs={10} sm={10} md={4}>
+            <Card variant="outlined">
+              <Formik
+                initialValues={{ username: "", password: "" }}
+                validationSchema={loginValidationScheme}
+                onSubmit={(values, { setSubmitting }) => {
+                  setTimeout(() => {
+                    alert(JSON.stringify(values, null, 2))
+                    setSubmitting(false)
+                  }, 400)
+                }}
+              >
+                {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleSubmit,
+                  isSubmitting,
+                }) => (
+                  <form onSubmit={handleSubmit}>
+                    <CardHeader title={<h4>Login</h4>}></CardHeader>
+                    <CardContent>
+                      <FormControl fullWidth className={classes.formControl}>
+                        <InputLabel htmlFor="username">Username</InputLabel>
+                        <Input
+                          id="username"
+                          onChange={handleChange}
+                          value={values.username}
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <Person />
+                            </InputAdornment>
+                          }
+                        />
+                        <FormHelperText
+                          id="username-helper-text"
+                          error={touched.username && Boolean(errors.username)}
+                        >
+                          {touched.username ? errors.username : ""}
+                        </FormHelperText>
+                      </FormControl>
+                      <FormControl fullWidth className={classes.formControl}>
+                        <InputLabel htmlFor="password">Password</InputLabel>
+                        <Input
+                          id="password"
+                          type={showPassword ? "text" : "password"}
+                          onChange={handleChange}
+                          value={values.password}
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <Lock />
+                            </InputAdornment>
+                          }
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={() => setShowPassword(!showPassword)}
+                              >
+                                {showPassword ? (
+                                  <Visibility />
+                                ) : (
+                                  <VisibilityOff />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                        />
+                        <FormHelperText
+                          id="password-helper-text"
+                          error={touched.password && Boolean(errors.password)}
+                        >
+                          {touched.password ? errors.password : ""}
+                        </FormHelperText>
+                      </FormControl>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        color="danger"
+                        type="submit"
+                        disabled={isSubmitting}
+                        fullWidth
+                      >
+                        Login
+                      </Button>
+                    </CardActions>
+                  </form>
+                )}
+              </Formik>
             </Card>
           </GridItem>
         </GridContainer>

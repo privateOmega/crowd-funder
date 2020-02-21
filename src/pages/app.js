@@ -2,8 +2,8 @@ import React from "react"
 import { Router } from "@reach/router"
 
 import PrivateRoute from "../components/private-route"
-import ProfilePage from "../pages/Profile"
-import LoginPage from "../pages/Login"
+import ProfilePage from "../pages/profile"
+import LoginPage from "../pages/login"
 
 function App() {
   return (
