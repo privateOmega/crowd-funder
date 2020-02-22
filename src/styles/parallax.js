@@ -28,7 +28,7 @@ const parallaxStyles = {
     },
   },
   small: {
-    height: "380px",
+    height: "200px",
   },
 }
 

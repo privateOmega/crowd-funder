@@ -33,7 +33,7 @@ function LoginPage() {
   return (
     <div
       style={{
-        backgroundImage: `url(${require("../images/login-background.jpg")})`,
+        backgroundImage: `url(${require("../images/background.jpg")})`,
         backgroundSize: "cover",
         backgroundPosition: "top center",
       }}
@@ -119,6 +119,7 @@ function LoginPage() {
                     </CardContent>
                     <CardActions>
                       <Button
+                        href="/dashboard"
                         color="danger"
                         type="submit"
                         disabled={isSubmitting}
