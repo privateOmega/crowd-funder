@@ -31,7 +31,13 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <>
+    <div
+      style={{
+        backgroundImage: `url(${require("../images/login-background.jpg")})`,
+        backgroundSize: "cover",
+        backgroundPosition: "top center",
+      }}
+    >
       <SEO title="Login page" />
       <div className={classes.container}>
         <GridContainer justify="center">
@@ -128,7 +134,7 @@ function LoginPage() {
           </GridItem>
         </GridContainer>
       </div>
-    </>
+    </div>
   )
 }
 

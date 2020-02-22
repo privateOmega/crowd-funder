@@ -11,14 +11,14 @@ function Parallax({ filter, className, children, style, image, small }) {
   const classes = useStyles()
 
   let windowScrollTop
-  if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+  if (typeof window !== "undefined" && window.innerWidth >= 768) {
     windowScrollTop = window.pageYOffset / 3
   } else {
     windowScrollTop = 0
   }
 
   const [transform, setTransform] = useState(
-    "translate3d(0," + windowScrollTop + "px,0)"
+    `translate3d(0, ${windowScrollTop}px, 0)`
   )
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function Parallax({ filter, className, children, style, image, small }) {
 
   const resetTransform = () => {
     var windowScrollTop = window.pageYOffset / 3
-    setTransform("translate3d(0," + windowScrollTop + "px,0)")
+    setTransform(`translate3d(0, ${windowScrollTop}px, 0)`)
   }
 
   return (
@@ -47,7 +47,7 @@ function Parallax({ filter, className, children, style, image, small }) {
       })}
       style={{
         ...style,
-        backgroundImage: "url(" + image + ")",
+        backgroundImage: `url(${image})`,
         transform: transform,
       }}
     >

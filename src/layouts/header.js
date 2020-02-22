@@ -33,7 +33,7 @@ function Header({ siteTitle, rightLinks }) {
       })}
     >
       <Toolbar className={classes.container}>
-        <Button className={classes.title}>{siteTitle}</Button>
+        <Button href="/" className={classes.title}>{siteTitle}</Button>
         <Hidden smDown implementation="css">
           {rightLinks}
         </Hidden>

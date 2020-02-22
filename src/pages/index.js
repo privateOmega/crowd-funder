@@ -21,7 +21,7 @@ function IndexPage() {
   return (
     <>
       <SEO title="Home" />
-      <Parallax filter image={require("../images/image.jpg")}>
+      <Parallax filter image={require("../images/parallax-background.jpg")}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
