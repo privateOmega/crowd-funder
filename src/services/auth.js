@@ -5,26 +5,22 @@ export const getUser = () =>
     ? JSON.parse(window.localStorage.getItem("crowd-funder-user"))
     : {}
 
-const setUser = user =>
+export const setUser = user =>
   window.localStorage.setItem("crowd-funder-user", JSON.stringify(user))
-
-export const handleLogin = ({ username, password }) => {
-  if (username === `admin` && password === `password`) {
-    return setUser({
-      username: `admin`,
-      name: `Admin user`,
-      email: `admin@example.com`,
-    })
-  }
-  return false
-}
 
 export const isLoggedIn = () => {
   const user = getUser()
-  return !!user.username
+  return !!user.email
 }
 
-export const logout = callback => {
-  setUser({})
-  callback()
+export const logout = firebase => {
+  return new Promise(resolve => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser({})
+        resolve()
+      })
+  })
 }

@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 module.exports = {
   pathPrefix: "/crowd-funder",
   siteMetadata: {
@@ -40,6 +42,20 @@ module.exports = {
             family: `Roboto Slab`,
           },
         ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        features: {
+          auth: true,
+          database: true,
+          firestore: false,
+          storage: false,
+          messaging: false,
+          functions: true,
+          performance: false,
+        },
       },
     },
   ],
