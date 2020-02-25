@@ -12,9 +12,12 @@ import {
   InputAdornment,
   CardHeader,
   FormHelperText,
-  IconButton,
 } from "@material-ui/core"
 import { Person, Email, Money } from "@material-ui/icons"
+import * as Yup from "yup"
+
+import Button from "../components/button"
+import { withFirebase } from "../services/firebase"
 
 import loginPageStyles from "../styles/login-page"
 
@@ -143,7 +146,6 @@ function CheckoutForm({ firebase }) {
                   </FormHelperText>
                 </FormControl>
                 <CardElement
-                  options={CARD_OPTIONS}
                   onChange={e => {
                     setError(e.error)
                   }}

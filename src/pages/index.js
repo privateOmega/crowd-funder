@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { makeStyles } from "@material-ui/core"
 import classNames from "classnames"
 import { Favorite, Hotel, Announcement } from "@material-ui/icons"
+import Modal from "react-modal"
 
 import SEO from "../components/seo"
 import Parallax from "../components/parallax"
@@ -12,16 +13,30 @@ import ProgressBar from "../components/progress-bar"
 import InfoArea from "../components/info-area"
 import { withFirebase } from "../services/firebase"
 import * as config from "../config"
+import CheckoutForm from "../components/checkout-form"
 
 import indexPagestyles from "../styles/index-page"
 
 const useStyles = makeStyles(indexPagestyles)
+
+const modalStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: "2000"
+  },
+}
 
 function IndexPage({ firebase }) {
   const classes = useStyles()
 
   const [donationAmount, setDonationAmount] = useState(0)
   const [numberOfDonors, setNumberOfDonors] = useState(0)
+  const [modalVisibility, setModalVisibility] = useState(false)
 
   const updateDonationAmount = snapshot => {
     let snapshotValue = snapshot.val()
@@ -74,7 +89,7 @@ function IndexPage({ firebase }) {
                 management and telemetry.
               </h4>
               <br />
-              <Button href="/login" color="danger">
+              <Button color="danger" onClick={() => setModalVisibility(true)}>
                 Donate
               </Button>
             </GridItem>
@@ -143,6 +158,13 @@ function IndexPage({ firebase }) {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={modalVisibility}
+        onRequestClose={() => setModalVisibility(false)}
+        styles={modalStyles}
+      >
+        <CheckoutForm />
+      </Modal>
     </>
   )
 }
