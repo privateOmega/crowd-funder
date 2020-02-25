@@ -14,21 +14,28 @@ import {
 } from "@material-ui/core"
 import { Person, Lock, Visibility, VisibilityOff } from "@material-ui/icons"
 import { Formik } from "formik"
+import { navigate } from "gatsby"
 
 import SEO from "../components/seo"
 import GridContainer from "../components/grid-container"
 import GridItem from "../components/grid-item"
 import Button from "../components/button"
 import loginValidationScheme from "../components/login-validation-scheme"
+import { withFirebase } from "../services/firebase"
+import { setUser, isLoggedIn } from "../services/auth"
 
 import loginPageStyles from "../styles/login-page"
 
 const useStyles = makeStyles(loginPageStyles)
 
-function LoginPage() {
+function LoginPage({ firebase }) {
   const classes = useStyles()
 
   const [showPassword, setShowPassword] = useState(false)
+
+  if (isLoggedIn()) {
+    navigate(`/app/dashboard`)
+  }
 
   return (
     <div
@@ -44,13 +51,22 @@ function LoginPage() {
           <GridItem xs={10} sm={10} md={4}>
             <Card variant="outlined">
               <Formik
-                initialValues={{ username: "", password: "" }}
+                initialValues={{ email: "", password: "" }}
                 validationSchema={loginValidationScheme}
-                onSubmit={(values, { setSubmitting }) => {
-                  setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2))
+                onSubmit={async (values, { setSubmitting }) => {
+                  try {
+                    const {
+                      user,
+                    } = await firebase
+                      .auth()
+                      .signInWithEmailAndPassword(values.email, values.password)
+                    setUser(user)
+                    navigate(`/app/dashboard`)
+                  } catch (error) {
+                    console.log(error)
+                  } finally {
                     setSubmitting(false)
-                  }, 400)
+                  }
                 }}
               >
                 {({
@@ -65,11 +81,11 @@ function LoginPage() {
                     <CardHeader title={<h4>Login</h4>}></CardHeader>
                     <CardContent>
                       <FormControl fullWidth className={classes.formControl}>
-                        <InputLabel htmlFor="username">Username</InputLabel>
+                        <InputLabel htmlFor="email">Email</InputLabel>
                         <Input
-                          id="username"
+                          id="email"
                           onChange={handleChange}
-                          value={values.username}
+                          value={values.email}
                           startAdornment={
                             <InputAdornment position="start">
                               <Person />
@@ -77,10 +93,10 @@ function LoginPage() {
                           }
                         />
                         <FormHelperText
-                          id="username-helper-text"
-                          error={touched.username && Boolean(errors.username)}
+                          id="email-helper-text"
+                          error={touched.email && Boolean(errors.email)}
                         >
-                          {touched.username ? errors.username : ""}
+                          {touched.email ? errors.email : ""}
                         </FormHelperText>
                       </FormControl>
                       <FormControl fullWidth className={classes.formControl}>
@@ -119,7 +135,6 @@ function LoginPage() {
                     </CardContent>
                     <CardActions>
                       <Button
-                        href="/dashboard"
                         color="danger"
                         type="submit"
                         disabled={isSubmitting}
@@ -139,4 +154,4 @@ function LoginPage() {
   )
 }
 
-export default LoginPage
+export default withFirebase(LoginPage)
