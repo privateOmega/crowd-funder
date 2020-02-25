@@ -15,7 +15,7 @@ const gridItemStyles = {
 
 const useStyles = makeStyles(gridItemStyles)
 
-export default function GridItem({ children, className, ...rest }) {
+function GridItem({ children, className, ...rest }) {
   const classes = useStyles()
 
   return (
@@ -33,3 +33,5 @@ GridItem.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
 }
+
+export default GridItem

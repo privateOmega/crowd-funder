@@ -12,7 +12,7 @@ const gridContainerStyles = {
 
 const useStyles = makeStyles(gridContainerStyles)
 
-export default function GridContainer({ children, className, ...rest }) {
+function GridContainer({ children, className, ...rest }) {
   const classes = useStyles()
 
   return (
@@ -30,3 +30,5 @@ GridContainer.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
 }
+
+export default GridContainer

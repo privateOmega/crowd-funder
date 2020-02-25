@@ -15,18 +15,27 @@ import {
 import { Person, Lock, Visibility, VisibilityOff } from "@material-ui/icons"
 import { Formik } from "formik"
 import { navigate } from "gatsby"
+import * as Yup from "yup"
 
 import SEO from "../components/seo"
 import GridContainer from "../components/grid-container"
 import GridItem from "../components/grid-item"
 import Button from "../components/button"
-import loginValidationScheme from "../components/login-validation-scheme"
 import { withFirebase } from "../services/firebase"
 import { setUser, isLoggedIn } from "../services/auth"
 
 import loginPageStyles from "../styles/login-page"
 
 const useStyles = makeStyles(loginPageStyles)
+
+const loginValidationSchema = Yup.object({
+  email: Yup.string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  password: Yup.string()
+    .required("Enter your password")
+    .min(8, "Password must contain at least 8 characters"),
+})
 
 function LoginPage({ firebase }) {
   const classes = useStyles()
@@ -52,7 +61,7 @@ function LoginPage({ firebase }) {
             <Card variant="outlined">
               <Formik
                 initialValues={{ email: "", password: "" }}
-                validationSchema={loginValidationScheme}
+                validationSchema={loginValidationSchema}
                 onSubmit={async (values, { setSubmitting }) => {
                   try {
                     const {
