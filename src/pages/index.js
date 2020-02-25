@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { makeStyles } from "@material-ui/core"
 import classNames from "classnames"
 import { Favorite, Hotel, Announcement } from "@material-ui/icons"
@@ -10,13 +10,54 @@ import GridItem from "../components/grid-item"
 import Button from "../components/button"
 import ProgressBar from "../components/progress-bar"
 import InfoArea from "../components/info-area"
+import { withFirebase } from "../services/firebase"
+import * as config from "../config"
 
 import indexPagestyles from "../styles/index-page"
 
 const useStyles = makeStyles(indexPagestyles)
 
-function IndexPage() {
+function IndexPage({ firebase }) {
   const classes = useStyles()
+
+  const [donationAmount, setDonationAmount] = useState(0)
+  const [numberOfDonors, setNumberOfDonors] = useState(0)
+
+  const updateDonationAmount = snapshot => {
+    let snapshotValue = snapshot.val()
+    if (!snapshotValue) {
+      snapshotValue = []
+    }
+    const donationAmount = snapshotValue.reduce(
+      (result, value) => result + value.amount,
+      0
+    )
+
+    setDonationAmount(donationAmount)
+    setNumberOfDonors(snapshotValue.length)
+  }
+
+  const addEventHandler = async donationsRefPromise => {
+    const donationsRef = await donationsRefPromise
+
+    donationsRef.on("value", updateDonationAmount)
+  }
+
+  const removeEventHandler = async donationsRefPromise => {
+    const donationsRef = await donationsRefPromise
+    donationsRef.off("value", updateDonationAmount)
+  }
+
+  useEffect(() => {
+    if (firebase) {
+      const donationsRefPromise = firebase.database().ref("donations")
+
+      addEventHandler(donationsRefPromise)
+      return () => {
+        removeEventHandler(donationsRefPromise)
+      }
+    }
+  })
 
   return (
     <>
@@ -88,7 +129,15 @@ function IndexPage() {
           <div className={classes.section}>
             <GridContainer justify="center">
               <GridItem xs={8} sm={8} md={8}>
-                <ProgressBar variant="determinate" value={74.61} />
+                <ProgressBar
+                  variant="determinate"
+                  value={Math.min(
+                    (donationAmount / config.goalAmount) * 100,
+                    100
+                  )}
+                  totalDonation={donationAmount}
+                  numberOfDonors={numberOfDonors}
+                />
               </GridItem>
             </GridContainer>
           </div>
@@ -98,4 +147,4 @@ function IndexPage() {
   )
 }
 
-export default IndexPage
+export default withFirebase(IndexPage)

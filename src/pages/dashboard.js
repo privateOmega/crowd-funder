@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {
   makeStyles,
   Table,
@@ -15,6 +15,8 @@ import SEO from "../components/seo"
 import Parallax from "../components/parallax"
 import GridContainer from "../components/grid-container"
 import GridItem from "../components/grid-item"
+import { withFirebase } from "../services/firebase"
+import * as config from "../config"
 
 import dashboardPageStyles from "../styles/dashboard-page"
 
@@ -37,17 +39,13 @@ const columns = [
   },
 ]
 
-const rows = [
-  { name: "Kiran", email: "kiran@temp.com", amount: 34 },
-  { name: "Mathew", email: "mathew@temp.com", amount: 55 },
-  { name: "Mohan", email: "mohan@temp.com", amount: 100 },
-]
-
-function DashboardPage() {
+function DashboardPage({ firebase }) {
   const classes = useStyles()
 
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [donations, setDonations] = useState([])
+  const [donationAmount, setDonationAmount] = useState(0)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -58,6 +56,44 @@ function DashboardPage() {
     setPage(0)
   }
 
+  const updateDonations = snapshot => {
+    const donationObject = {
+      key: snapshot.key,
+      ...snapshot.val(),
+    }
+
+    const updatedDonations = [...donations, donationObject]
+
+    const updatedDonationAmount = updatedDonations.reduce(
+      (result, value) => result + value.amount,
+      0
+    )
+
+    setDonations(updatedDonations)
+    setDonationAmount(updatedDonationAmount)
+  }
+
+  const addEventHandler = async donationsRefPromise => {
+    const donationsRef = await donationsRefPromise
+    donationsRef.on("child_added", updateDonations)
+  }
+
+  const removeEventHandler = async donationsRefPromise => {
+    const donationsRef = await donationsRefPromise
+    donationsRef.off("child_added", updateDonations)
+  }
+
+  useEffect(() => {
+    if (firebase) {
+      const donationsRefPromise = firebase.database().ref("donations")
+
+      addEventHandler(donationsRefPromise)
+      return () => {
+        removeEventHandler(donationsRefPromise)
+      }
+    }
+  }, [firebase])
+
   return (
     <>
       <SEO title="Dashboard page" />
@@ -67,7 +103,9 @@ function DashboardPage() {
           <div className={classes.section}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8}>
-                <h2 className={classes.sectionTitle}>$7461 Raised</h2>
+                <h2
+                  className={classes.sectionTitle}
+                >{`${config.currencySymbol}${donationAmount} Raised`}</h2>
               </GridItem>
             </GridContainer>
           </div>
@@ -90,7 +128,7 @@ function DashboardPage() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {rows
+                      {donations
                         .slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
@@ -101,7 +139,7 @@ function DashboardPage() {
                               hover
                               role="checkbox"
                               tabIndex={-1}
-                              key={row.code}
+                              key={row.key}
                             >
                               {columns.map(column => {
                                 const value = row[column.id]
@@ -125,7 +163,7 @@ function DashboardPage() {
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 15]}
                   component="div"
-                  count={rows.length}
+                  count={donations.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onChangePage={handleChangePage}
@@ -140,4 +178,4 @@ function DashboardPage() {
   )
 }
 
-export default DashboardPage
+export default withFirebase(DashboardPage)

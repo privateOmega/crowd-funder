@@ -24,7 +24,11 @@ function HeaderLinks({ firebase }) {
       ) : (
         <>
           <ListItem className={classes.listItem}>
-            <Button color="transparent" className={classes.navLink}>
+            <Button
+              href="/app/dashboard"
+              color="transparent"
+              className={classes.navLink}
+            >
               Hi {getUser().email}
             </Button>
           </ListItem>

@@ -4,12 +4,13 @@ import { makeStyles, LinearProgress } from "@material-ui/core"
 
 import GridContainer from "../components/grid-container"
 import GridItem from "../components/grid-item"
+import * as config from "../config"
 
 import progressBarStyles from "../styles/progress-bar"
 
 const useStyles = makeStyles(progressBarStyles)
 
-function ProgressBar({ color, ...rest }) {
+function ProgressBar({ color, totalDonation, numberOfDonors, ...rest }) {
   const classes = useStyles()
 
   return (
@@ -23,13 +24,13 @@ function ProgressBar({ color, ...rest }) {
       />
       <GridContainer justify="center">
         <GridItem xs={4} sm={4} md={4}>
-          $7461 Raised
+          {`${config.currencySymbol}${totalDonation} Raised`}
         </GridItem>
         <GridItem xs={4} sm={4} md={4}>
-          12 Donors
+          {`${numberOfDonors} Donors`}
         </GridItem>
         <GridItem xs={4} sm={4} md={4}>
-          $10000 Goal
+          {`${config.currencySymbol}${config.goalAmount} Goal`}
         </GridItem>
       </GridContainer>
     </div>
@@ -38,6 +39,8 @@ function ProgressBar({ color, ...rest }) {
 
 ProgressBar.defaultProps = {
   color: "danger",
+  totalDonation: 0,
+  numberOfDonors: 0,
 }
 
 ProgressBar.propTypes = {
@@ -49,6 +52,8 @@ ProgressBar.propTypes = {
     "info",
     "gray",
   ]),
+  totalDonation: PropTypes.number,
+  numberOfDonors: PropTypes.number,
 }
 
 export default ProgressBar
