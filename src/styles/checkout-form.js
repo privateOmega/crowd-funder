@@ -1,9 +1,9 @@
 import { container } from "./crowd-funder"
 
-const loginPageStyles = {
+const checkoutFormStyles = {
   container: {
     ...container,
-    zIndex: "2",
+    zIndex: "13",
     position: "relative",
     paddingTop: "20vh",
     color: "#FFFFFF",
@@ -16,4 +16,4 @@ const loginPageStyles = {
   },
 }
 
-export default loginPageStyles
+export default checkoutFormStyles

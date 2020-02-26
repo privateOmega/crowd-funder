@@ -10,7 +10,7 @@ import HeaderLinks from "./header-links"
 import Footer from "./footer"
 import { FirebaseContext } from "../services/firebase"
 
-const stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY
+const stripePublishableKey = process.env.GATSBY_STRIPE_PUBLISHABLE_KEY
 const stripePromise = loadStripe(stripePublishableKey)
 
 function Layout({ children }) {

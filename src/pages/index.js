@@ -16,20 +16,9 @@ import * as config from "../config"
 import CheckoutForm from "../components/checkout-form"
 
 import indexPagestyles from "../styles/index-page"
+import modalStyles from "../styles/modal"
 
 const useStyles = makeStyles(indexPagestyles)
-
-const modalStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    zIndex: "2000"
-  },
-}
 
 function IndexPage({ firebase }) {
   const classes = useStyles()
@@ -161,7 +150,8 @@ function IndexPage({ firebase }) {
       <Modal
         isOpen={modalVisibility}
         onRequestClose={() => setModalVisibility(false)}
-        styles={modalStyles}
+        style={modalStyles}
+        ariaHideApp={false}
       >
         <CheckoutForm />
       </Modal>
